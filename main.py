@@ -1,10 +1,11 @@
-!wget https://raw.githubusercontent.com/yotam-biu/tutorial9/main/penguins.csv -O /content/penguins.csv
+# Download the data from your GitHub repository
+!wget https://raw.githubusercontent.com/yotam-biu/ps9/main/parkinsons.csv -O /content/parkinsons.csv
 !wget https://raw.githubusercontent.com/yotam-biu/python_utils/main/lab_setup_do_not_edit.py -O /content/lab_setup_do_not_edit.py
 import lab_setup_do_not_edit
 
 import pandas as pd
 
-df = pd.read_csv('penguins.csv')
+df = pd.read_csv('parkinsons.csv')
 # Drop rows with any missing values
 df = df.dropna()
 df.head()
@@ -12,13 +13,12 @@ df.head()
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-sns.pairplot(df, hue='sex')
+sns.pairplot(df, hue='status')
 
 plt.show()
 
-x = df[['bill_depth_mm', 'body_mass_g']]
-y = df['sex']
-y.head()
+x = df[['DFA', 'HNR']]
+y = df['status']
 
 from sklearn.preprocessing import MinMaxScaler
 
@@ -38,7 +38,7 @@ print(f'y_test shape: {y_test.shape}')
 
 from sklearn.neighbors import KNeighborsClassifier
 
-model = KNeighborsClassifier(n_neighbors=5)
+model = KNeighborsClassifier(n_neighbors=7)
 model.fit(x_train, y_train)
 
 model
